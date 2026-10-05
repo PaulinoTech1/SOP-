@@ -12,6 +12,10 @@ Copy this file to the appropriate directory and fill in every field.
 - **Review date:** (max 12 months from approval)
 - **Applies to:** (systems, roles, sites)
 - **Compliance refs:** (e.g. PCI DSS 4.0 Req 8, GLBA Safeguards)
+- **Retired date:** (if retired)
+- **Retirement reason:** superseded | eliminated | merged | obsolete (if retired)
+- **Replaced by:** (SOP ID, or `none`)
+- **Retirement approved by:** (if retired)
 
 ## Purpose
 
