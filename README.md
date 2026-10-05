@@ -34,6 +34,7 @@ The `ownership/toil-register.md` tracks where every recurring task sits on this 
 3. **Approve** — the owner signs off, sets `review-date` (max 12 months out).
 4. **Publish** — `status: active`. This is the version people follow.
 5. **Review** — on or before `review-date`, the owner re-validates or retires it.
+6. **Retire** — per `workflows/sop-retirement.md`. Marked `retired` with a reason, a replacement pointer, and a log entry. Never deleted, never silent.
 
 A procedure past its review date is **expired**, not active. Expired procedures get fixed or archived, never followed blindly.
 
