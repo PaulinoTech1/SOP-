@@ -12,6 +12,10 @@
 
 A shared language for how bad it is. Severity drives who gets woken up, how fast we respond, and how we communicate. When in doubt, pick the higher severity. You can always downgrade.
 
+## TL;DR
+
+SEV-1: business is down or data is being stolen. Drop everything. SEV-2: badly degraded or contained security event. Respond within the hour. SEV-3: minor, workaround exists. SEV-4: informational. Unsure? Go one level higher.
+
 ## Definitions
 
 ### SEV-1 — Critical
@@ -45,3 +49,9 @@ A shared language for how bad it is. Severity drives who gets woken up, how fast
 ## Downgrade / upgrade
 
 Anyone can escalate a severity. Only the incident owner can downgrade, and the reason goes in the ticket. When in doubt, escalate.
+
+## Tips & pointers
+
+- New responders consistently under-severity. If you're debating between two levels, the higher one is almost always right.
+- SEV-2s that last more than 4 hours are SEV-1s in practice. Time is a severity multiplier.
+- Don't let "we have a workaround" talk you down from SEV-2 to SEV-3 if the workaround requires heroics. A workaround that only one person knows isn't a workaround, it's a risk.
