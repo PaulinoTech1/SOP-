@@ -11,7 +11,7 @@ markdown_extensions:
   - admonition
   - tables
 nav:
-  - Home: README.md
+  - Home: index.md
   - Start here: onboarding/start-here.md
   - Onboarding:
       - Access matrix: onboarding/access-matrix.md
