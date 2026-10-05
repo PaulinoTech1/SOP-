@@ -13,6 +13,10 @@
 
 Provision a new employee with exactly the access their role requires, on a compliant device, with a verifiable trail. No more, no less.
 
+## TL;DR
+
+Create the account 3 days early (sign-in blocked until Day 1). Assign role-based groups only, never individual permissions. Enroll the device in MDM and verify encryption before handing it over. On Day 1, unblock sign-in, confirm MFA, and have them sign the acceptable-use policy. Done means productive within the hour.
+
 ## Scope
 
 Covers account creation, device assignment, application access, and Day-1 verification. Does not cover HR paperwork, payroll, or physical building access (facilities).
@@ -75,3 +79,9 @@ If the hire does not start: disable the account, revoke all group memberships, r
 
 - **Contractors/temps:** Same checklist, but accounts get an expiration date at creation. No exceptions.
 - **Rehires:** Treat as new hire. Do not reactivate the old account; create fresh and re-provision.
+
+## Tips & pointers
+
+- Get the manager to confirm the access profile **in writing** before Day -3. "Just give them what the last person had" is how privilege creep starts.
+- Pre-stage everything. The only thing that should happen on Day 1 is unblocking sign-in and a 10-minute walkthrough. If you're still installing software while the new hire watches, the process failed upstream.
+- For shared workstations, the profile is the product. Get the base image right once and every subsequent setup is just assignment, not configuration.
