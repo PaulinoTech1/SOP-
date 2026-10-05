@@ -1,0 +1,39 @@
+# SOP
+
+Standard Operating Procedures for IT operations: onboarding, compliance, workflows, incident response, and ownership.
+
+Built to make onboarding faster and operations repeatable. Every procedure follows the same template, has a named owner, and carries a review date. If it doesn't have an owner and a review date, it's a draft, not a procedure.
+
+## Layout
+
+| Directory | Purpose |
+|---|---|
+| `templates/` | Blank templates. Start here when writing a new SOP. |
+| `onboarding/` | New-hire and offboarding checklists, access matrices. |
+| `compliance/` | Control mappings for PCI DSS, GLBA, and other frameworks. |
+| `workflows/` | Step-by-step operational procedures (provisioning, patching, reviews). |
+| `incident-response/` | Severity definitions, escalation matrix, response playbooks. |
+| `ownership/` | RACI charts and risk register: who owns what, and what happens if it fails. |
+
+## SOP lifecycle
+
+1. **Draft** — written from the template, marked `status: draft`.
+2. **Review** — a second person walks through it against the real environment.
+3. **Approve** — the owner signs off, sets `review-date` (max 12 months out).
+4. **Publish** — `status: active`. This is the version people follow.
+5. **Review** — on or before `review-date`, the owner re-validates or retires it.
+
+A procedure past its review date is **expired**, not active. Expired procedures get fixed or archived, never followed blindly.
+
+## Writing a new SOP
+
+1. Copy `templates/sop-template.md`.
+2. Fill in every metadata field. No blank owners, no blank review dates.
+3. Write for the person doing the job at 2 AM, not for an auditor.
+4. Get it reviewed before marking it active.
+
+## Principles
+
+- **Procedures describe the work, not the aspiration.** If the team doesn't actually do it this way, fix the procedure or fix the work, then document the truth.
+- **One owner per procedure.** Shared ownership is no ownership.
+- **Compliance mappings reference procedures, not the other way around.** The control mapping in `compliance/` points at the workflow that satisfies it.
