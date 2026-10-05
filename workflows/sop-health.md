@@ -44,6 +44,7 @@ In strict mode, warnings fail the build. The check validates:
 | Review dates | Active SOPs past their review date |
 | Required sections | Procedural SOPs missing TL;DR or tips |
 | Cross-references | Links to SOP-XXX IDs that don't exist |
+| File references | Backticked `.md` paths that don't resolve to a real file |
 | Retirement fields | Retired SOPs without reason, replacement, or approver |
 
 **Expected result:** Green check or a specific list of findings. Findings get fixed in the same change window, not "later."
