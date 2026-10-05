@@ -12,5 +12,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Stage docs
+        run: |
+          mkdir -p docs
+          cp README.md docs/index.md
+          cp BUILD.md docs/
+          for d in onboarding workflows incident-response compliance ownership templates; do
+            [ -d "$d" ] && cp -r "$d" docs/
+          done
       - run: pip install mkdocs-material
       - run: mkdocs gh-deploy --force
