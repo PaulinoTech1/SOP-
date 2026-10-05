@@ -12,6 +12,10 @@
 
 SOPs document how work gets done. This procedure identifies which of that work is repetitive enough to automate. The goal isn't documentation for its own sake — it's finding the tasks that eat hours every month so they can be measured, then reduced, then eliminated.
 
+## TL;DR
+
+List everything you do more than twice a month. Score it: frequency × time × error risk. High score + deterministic steps = automate now. Low automatability = document it well and keep it manual. And always ask whether the task should exist before you automate it.
+
 ## Scope
 
 Covers identification and scoring of repetitive tasks. Automation implementation is tracked separately per task.
@@ -73,3 +77,10 @@ Not applicable — this is an assessment procedure.
 ## Exceptions
 
 One-off incidents and novel troubleshooting are not toil. Don't try to automate what you haven't seen twice.
+
+## Tips & pointers
+
+- Time the manual task **before** you automate it. Without a baseline, "the script is faster" is a feeling, not a fact.
+- Start with the highest error-risk task, not the most frequent one. Automating a 5-minute daily task saves 20 hours a year; automating an error-prone quarterly task prevents the incident that costs a week.
+- The `eliminate` column is the most valuable one. Every task you delete is better than every task you automate.
+- Re-scoring feels like overhead until the first time a priority shift saves you from automating the wrong thing.
