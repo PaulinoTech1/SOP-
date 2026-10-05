@@ -13,6 +13,10 @@
 
 Remove a departing person's access completely and promptly, recover company assets, and preserve any data the business needs to retain. Terminations are time-sensitive; this procedure has explicit time targets.
 
+## TL;DR
+
+Block sign-in and kill all sessions within 1 hour. Strip group memberships within 4 hours. Collect the hardware within 2 business days. Don't delete the account for 30 days (retention + license recovery). Involuntary terms: do steps 1–2 before the person is notified.
+
 ## Scope
 
 Covers account disablement, access revocation, device recovery, and data handling. Does not cover HR exit interviews or final pay.
@@ -72,3 +76,10 @@ Offboarding is not rolled back. If a termination is rescinded, treat the person 
 
 - **Involuntary terminations:** Steps 1 and 2 happen before the person is notified, coordinated with HR/management. No exceptions to the 1-hour target.
 - **Contractors:** Account expiration should already be set at hire. This procedure is the backstop if it wasn't.
+
+## Tips & pointers
+
+- **Verify the block.** After disabling sign-in, actually try to sign in as the user. Trust the console, then confirm it.
+- Shared credentials are the silent killer. Keep a list of every shared password the person could know; rotate them on involuntary terms even if you think they never used them.
+- The 30-day hold isn't bureaucracy, it's your safety net. Managers always remember the critical file three weeks later.
+- Automate this. The JML leaver workflow exists because humans forget steps under time pressure, and offboarding is always under time pressure.
