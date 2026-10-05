@@ -5,7 +5,7 @@
 - **Owner:** IT Administrator
 - **Status:** draft
 - **Created:** 2026-10-05
-- **Review date:** 2027-01-05 (quarterly)
+- **Review date:** 2027-01-05
 - **Applies to:** All IT operational tasks
 
 ## Purpose
