@@ -12,6 +12,10 @@
 
 Defines who gets involved at each severity, in what order, and what each level is expected to do. No guessing during an incident.
 
+## TL;DR
+
+L1 (you) triages everything. Can't fix it in the response window or the scope is growing? Escalate. One owner, one channel, no side threads. SEV-1: tell leadership in 30 min. After it's over: blameless review within 5 days, action items with owners.
+
 ## Escalation levels
 
 | Level | Role | Engaged at | Responsibility |
@@ -47,3 +51,10 @@ Every SEV-1 and SEV-2 gets a blameless post-incident review within 5 business da
 4. Action items with owners and due dates.
 
 The review is about the system, not the person. If people fear the review, they'll hide the next incident.
+
+## Tips & pointers
+
+- Declare the incident early. "I think this might be a SEV-2" costs nothing; discovering it was a SEV-1 three hours later costs everything.
+- Write the timeline **during** the incident, not after. Memory degrades fast and the review is only as good as the timeline.
+- The hardest escalation is the first one. If you're unsure whether to wake someone up, wake them up. They'll forgive a false alarm faster than a late one.
+- Keep a printed copy of the severity definitions where you work. You won't want to go looking for a wiki page at 2 AM.
