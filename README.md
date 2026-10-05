@@ -9,11 +9,20 @@ Built to make onboarding faster and operations repeatable. Every procedure follo
 | Directory | Purpose |
 |---|---|
 | `templates/` | Blank templates. Start here when writing a new SOP. |
-| `onboarding/` | New-hire and offboarding checklists, access matrices. |
+| `onboarding/` | Start-here path, access matrix, new-hire and offboarding checklists. |
 | `compliance/` | Control mappings for PCI DSS, GLBA, and other frameworks. |
 | `workflows/` | Step-by-step operational procedures (provisioning, patching, reviews). Includes the toil-identification process. |
 | `incident-response/` | Severity definitions, escalation matrix, response playbooks. |
-| `ownership/` | RACI charts, risk register, and the toil register: who owns what, and what repetitive work costs. |
+| `ownership/` | RACI charts, risk register, toil register, retirement log. |
+| `scripts/` | The SOP linter (CI for procedures). |
+
+## Reading this repo
+
+New here? Start with `onboarding/start-here.md` — a 45-minute reading path in order.
+
+Want the reasoning behind the design? Read `BUILD.md` — every major decision is recorded as an architecture decision.
+
+Prefer a website to raw Markdown? `mkdocs.yml` builds a searchable docs site (`mkdocs build`, deploy to GitHub Pages).
 
 ## Maturity model
 
