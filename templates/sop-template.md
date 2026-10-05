@@ -16,6 +16,7 @@ Copy this file to the appropriate directory and fill in every field.
 - **Retirement reason:** superseded | eliminated | merged | obsolete (if retired)
 - **Replaced by:** (SOP ID, or `none`)
 - **Retirement approved by:** (if retired)
+- **Last exercised:** (date the procedure was last followed for real; update when used)
 
 ## Purpose
 
