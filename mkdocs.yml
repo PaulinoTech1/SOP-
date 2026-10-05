@@ -1,0 +1,40 @@
+site_name: SOP — Standard Operating Procedures
+site_description: IT operations procedures, compliance mappings, and ownership.
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - search.suggest
+    - search.highlight
+markdown_extensions:
+  - admonition
+  - tables
+nav:
+  - Home: README.md
+  - Start here: onboarding/start-here.md
+  - Onboarding:
+      - Access matrix: onboarding/access-matrix.md
+      - New-hire checklist: onboarding/new-hire-checklist.md
+      - Offboarding checklist: onboarding/offboarding-checklist.md
+  - Workflows:
+      - Device hardening: workflows/device-hardening.md
+      - Vulnerability scanning: workflows/vulnerability-scanning.md
+      - Asset disposition: workflows/asset-disposition.md
+      - Data inventory: workflows/data-inventory.md
+      - Change management: workflows/change-management.md
+      - Toil identification: workflows/toil-identification.md
+      - SOP retirement: workflows/sop-retirement.md
+      - SOP health: workflows/sop-health.md
+  - Incident response:
+      - Severity definitions: incident-response/severity-definitions.md
+      - Escalation matrix: incident-response/escalation-matrix.md
+  - Compliance:
+      - Control mapping: compliance/control-mapping.md
+  - Ownership:
+      - RACI: ownership/raci.md
+      - Toil register: ownership/toil-register.md
+      - Retirement log: ownership/retirement-log.md
+  - Templates:
+      - SOP template: templates/sop-template.md
+  - Build log: BUILD.md
