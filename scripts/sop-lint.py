@@ -34,6 +34,8 @@ SKIP_FILES = {"README.md"}
 
 META_RE = re.compile(r"^- \*\*(.+?):\*\*\s*(.*)$")
 SOPREF_RE = re.compile(r"SOP-(\d{3})")
+# Matches `path/to/file.md` in backticks, excluding bare SOP-XXX ids.
+FILEREF_RE = re.compile(r"`([a-z0-9_\-./]+\.md)`", re.IGNORECASE)
 
 
 def parse_metadata(text):
@@ -95,6 +97,13 @@ def check_sop(sop_id, rel, text, meta, all_ids):
         ref_id = f"SOP-{ref}"
         if ref_id != sop_id and ref_id not in all_ids:
             findings.append(("warning", f"dangling reference to {ref_id}"))
+
+    for fref in set(FILEREF_RE.findall(text)):
+        # Resolve relative to the referencing file first, then repo root.
+        candidates = [(rel.parent / fref).resolve(), (REPO / fref).resolve()]
+        repo_root = REPO.resolve()
+        if not any(str(c).startswith(str(repo_root)) and c.is_file() for c in candidates):
+            findings.append(("warning", f"dangling file reference to `{fref}`"))
 
     if status == "retired":
         for field in ("retired date", "retirement reason", "replaced by", "retirement approved by"):
