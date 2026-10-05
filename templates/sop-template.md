@@ -17,6 +17,10 @@ Copy this file to the appropriate directory and fill in every field.
 
 One paragraph. What does this procedure accomplish and why does it exist?
 
+## TL;DR
+
+The 30-second version. If the reader is in a hurry, this is all they read. Three to five lines max: what to do, in what order, and the one thing not to forget.
+
 ## Scope
 
 What is covered. What is explicitly out of scope.
@@ -44,6 +48,10 @@ How do you undo it if something goes wrong? If it can't be undone, say so.
 ## Exceptions
 
 Known cases where this procedure doesn't apply, and what to do instead.
+
+## Tips & pointers
+
+The stuff you learn after doing this ten times. Shortcuts, gotchas, things the procedure doesn't say because they're judgment calls. This section is allowed to be opinionated.
 
 ## Change log
 
