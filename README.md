@@ -11,9 +11,21 @@ Built to make onboarding faster and operations repeatable. Every procedure follo
 | `templates/` | Blank templates. Start here when writing a new SOP. |
 | `onboarding/` | New-hire and offboarding checklists, access matrices. |
 | `compliance/` | Control mappings for PCI DSS, GLBA, and other frameworks. |
-| `workflows/` | Step-by-step operational procedures (provisioning, patching, reviews). |
+| `workflows/` | Step-by-step operational procedures (provisioning, patching, reviews). Includes the toil-identification process. |
 | `incident-response/` | Severity definitions, escalation matrix, response playbooks. |
-| `ownership/` | RACI charts and risk register: who owns what, and what happens if it fails. |
+| `ownership/` | RACI charts, risk register, and the toil register: who owns what, and what repetitive work costs. |
+
+## Maturity model
+
+SOPs are not the end state. They are the raw material. Each procedure moves through these stages:
+
+1. **Ad-hoc** — done from memory, differently each time.
+2. **Documented** — written down, owned, review-dated. (This repo.)
+3. **Measured** — timed, scored for toil. You know what it costs.
+4. **Automated** — the machine does it; the SOP describes the automation and its guardrails.
+5. **Eliminated** — the task no longer needs to exist.
+
+The `ownership/toil-register.md` tracks where every recurring task sits on this ladder. Growth is moving tasks right, not adding more procedures.
 
 ## SOP lifecycle
 
