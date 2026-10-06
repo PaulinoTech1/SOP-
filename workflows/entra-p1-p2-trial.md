@@ -106,6 +106,8 @@ Validated in a test tenant that held the base Intune SKU only (no Entra ID P1/P2
 
 **Sequencing lesson:** the original apply order disabled Security Defaults before Conditional Access existed, and the CA baseline had no require-MFA policy. On an unlicensed tenant that ordering would have removed all MFA. The corrected order (this SOP) never disables Security Defaults until a verified require-MFA CA policy with break-glass exclusions is in place.
 
+**Trial stacking (lab):** The evaluation deliberately stacked an Intune Plan 1 trial with an Entra ID P1/P2 trial to maximize learning inside the overlapping trial window and to mirror a production SKU mix. Four Entra seats were assigned for admin and pilot coverage (break-glass accounts left unlicensed). License state was verified read-only via Graph `subscribedSkus` / `licenseDetails` before any role-assignable-group or Conditional Access writes; gated rollout still follows this SOP's order (role-assignable groups first).
+
 ## Tips & pointers
 
 - The immutable `isAssignableToRole` flag is the trap. If you create the admin groups during the license-independent phase to "save time," they come out non-role-assignable and you cannot fix them — you have to delete and recreate under P1. Wait for the trial.
@@ -120,3 +122,4 @@ Validated in a test tenant that held the base Intune SKU only (no Entra ID P1/P2
 | Date | Author | Change |
 |---|---|---|
 | 2026-10-06 | IT Administrator | Initial draft; lab-validated license gating and corrected rollout order. |
+| 2026-10-06 | IT Administrator | Note deliberate trial stacking of Intune Plan 1 + Entra P1/P2 for max learning; 4 Entra seats for admin/pilot. |
