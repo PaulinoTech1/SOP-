@@ -23,6 +23,7 @@ nav:
       - Asset disposition: workflows/asset-disposition.md
       - Data inventory: workflows/data-inventory.md
       - Change management: workflows/change-management.md
+      - Entra P1/P2 trial: workflows/entra-p1-p2-trial.md
       - Toil identification: workflows/toil-identification.md
       - SOP retirement: workflows/sop-retirement.md
       - SOP health: workflows/sop-health.md
