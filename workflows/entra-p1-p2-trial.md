@@ -110,6 +110,21 @@ Validated in a test tenant that held the base Intune SKU only (no Entra ID P1/P2
 
 **Trial stacking (lab):** The evaluation deliberately stacked an Intune Plan 1 trial with an Entra ID P1/P2 trial to maximize learning inside the overlapping trial window and to mirror a production SKU mix. Four Entra seats were assigned for admin and pilot coverage (break-glass accounts left unlicensed). License state was verified read-only via Graph `subscribedSkus` / `licenseDetails` before any role-assignable-group or Conditional Access writes; gated rollout still follows this SOP's order (role-assignable groups first).
 
+### Failed ideas (lab)
+
+Kept on purpose so the same mistakes are not repeated. Each one was disproven by a captured Graph response.
+
+- **"Autopilot is blocked only by missing P1."** Disproven: the identical opaque 400 persisted after P1 was active and assigned. Treat a plausible prerequisite as a hypothesis with a falsifying test, not a root cause.
+- **"A different Autopilot request schema will work."** Singular and legacy plural out-of-box-experience shapes, and a minimal body, all failed identically. If the error does not change with the body, look at tenant or service state.
+- **"The Autopilot profile API exists on Graph v1.0."** It is beta-only ("Resource not found for the segment").
+- **"Calling set-MDM-authority is a safe probe."** It is a write action, and it returns 400 when the authority is already Intune. Check with a read instead.
+- **"The Intune trial unlocks the gated features."** Conditional Access, role-assignable groups and automatic enrollment are Entra ID P1 features. Map controls to SKUs before starting a time-boxed trial.
+- **"Seats picked in the trial flow are assigned."** Graph showed one consumed seat. Verify consumed units and per-user license details.
+- **"Hand-typed role template IDs are fine."** Three were wrong (404). Pull IDs from the live role definitions.
+- **"A dedicated authentication-strength write scope exists."** Sign-in failed with AADSTS650053. The Conditional Access and authentication-method policy scopes are sufficient.
+- **"A CA policy can be created enabled while Security Defaults is on."** Graph returns 400. Create report-only, disable Security Defaults, then enable immediately.
+- **"A new CA policy can be updated right after the Security Defaults change."** A transient 404 occurred; it succeeded about a minute later. Retry with backoff.
+
 ## Tips & pointers
 
 - The immutable `isAssignableToRole` flag is the trap. If you create the admin groups during the license-independent phase to "save time," they come out non-role-assignable and you cannot fix them — you have to delete and recreate under P1. Wait for the trial.
@@ -126,3 +141,4 @@ Validated in a test tenant that held the base Intune SKU only (no Entra ID P1/P2
 | 2026-10-06 | IT Administrator | Initial draft; lab-validated license gating and corrected rollout order. |
 | 2026-10-06 | IT Administrator | Note deliberate trial stacking of Intune Plan 1 + Entra P1/P2 for max learning; 4 Entra seats for admin/pilot. |
 | 2026-10-07 | IT Administrator | Correct Autopilot finding: failure was initially attributed to missing P1 but persisted with P1 active; root cause under investigation (MDM user scope, Autopilot service initialization, or request schema). |
+| 2026-10-07 | IT Administrator | Add "Failed ideas (lab)" subsection listing disproven hypotheses and their lessons. |
