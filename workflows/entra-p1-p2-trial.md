@@ -8,7 +8,7 @@
 - **Review date:** 2027-10-06
 - **Applies to:** Microsoft Entra ID tenant, Intune, break-glass admin accounts, pilot user group
 - **Compliance refs:** PCI DSS 4.0 Req 7 (least privilege), Req 8 (MFA / authentication); GLBA Safeguards (access controls, authentication)
-- **Last exercised:** 2026-10-06
+- **Last exercised:** 2026-10-07
 
 ## Purpose
 
@@ -72,7 +72,7 @@ Convert standing privileged role assignments to eligible, just-in-time activatio
 
 ### 10. Enable the remaining P1-gated features
 
-Dynamic group membership, group-based licensing, and **automatic MDM enrollment (Windows Autopilot)**. P1 is a prerequisite for automatic enrollment, but in the lab it was **not sufficient** on its own to create the Autopilot deployment profile — see Results. Also check the Intune MDM user scope (automatic enrollment) and confirm the profile can be created in the Intune admin center before relying on automation.
+Dynamic group membership, group-based licensing, and **automatic MDM enrollment (Windows Autopilot)**. P1 is a prerequisite for automatic enrollment, but in the lab it was **not sufficient** on its own to create the Autopilot deployment profile — see Results. Also set the Intune MDM user scope (automatic enrollment) to the managed-users group, which automatic enrollment needs (in the lab it did not fix the Autopilot profile error by itself), and confirm the profile can be created in the Intune admin center before relying on automation.
 
 **Expected result:** every gated control is live and verified, Security Defaults is off only because a tested CA require-MFA policy replaced it, and break-glass access has been proven to still work.
 
@@ -102,7 +102,7 @@ Validated in a test tenant that held the base Intune SKU only (no Entra ID P1/P2
 
 **Confirmed to require Entra ID P1:** Conditional Access policies; role-assignable groups (`isAssignableToRole = true`); dynamic group membership; group-based licensing; and automatic MDM enrollment.
 
-**Windows Autopilot deployment profile — root cause under investigation:** on the base license the Autopilot profile API returned an opaque backend error (HTTP 400, "An error has occurred", no detail) for every request shape, while the Enrollment Status Page succeeded. This was **initially attributed to the missing Entra ID P1** entitlement and Autopilot was re-scoped as P1-gated. That attribution was **wrong or at least incomplete**: after Entra ID P1 was active and assigned to the administrator (alongside Intune Plan 1), the same create request still failed with the identical opaque error, while listing profiles succeeded and the MDM authority was confirmed as Intune. A follow-up read-only check found the Intune MDM user scope for automatic enrollment set to *None* and the Autopilot settings endpoint returning not-found. Open hypotheses: (1) MDM user scope / automatic enrollment not configured; (2) the Autopilot service is not initialized in a new tenant until the profile blade is first used in the Intune admin center; (3) a request-body/schema mismatch on the backend. Next step: create one profile in the Intune admin center and compare the request the portal sends with the scripted one. Do not treat P1 alone as the fix.
+**Windows Autopilot deployment profile — root cause under investigation:** on the base license the Autopilot profile API returned an opaque backend error (HTTP 400, "An error has occurred", no detail) for every request shape, while the Enrollment Status Page succeeded. This was **initially attributed to the missing Entra ID P1** entitlement and Autopilot was re-scoped as P1-gated. That attribution was **wrong or at least incomplete**: after Entra ID P1 was active and assigned to the administrator (alongside Intune Plan 1), the same create request still failed with the identical opaque error, while listing profiles succeeded and the MDM authority was confirmed as Intune. A follow-up read-only check found the Intune MDM user scope for automatic enrollment set to *None* and the Autopilot settings endpoint returning not-found. The MDM user scope was then set to a selected all-managed-users security group (adding the group switched the scope from *None* to *Some* on its own; the MAM scope was left alone), and one retry of the same create about a minute later failed with the identical opaque error; the Autopilot settings endpoint still returned not-found and no profile was created. **The MDM user scope was therefore not the cause** (or not the only one), although it is still required for Windows automatic enrollment. Remaining hypotheses: (1) the Autopilot service is not initialized in a new tenant until the deployment-profile blade is first used in the Intune admin center; (2) a backend schema or service issue. Next step: create one profile in the Intune admin center and compare the request the portal sends with the scripted one; if the portal also fails, open a Microsoft support case with the activity IDs. Do not treat P1 or the MDM user scope alone as the fix.
 
 **Confirmed to require Entra ID P2:** Privileged Identity Management (eligible / just-in-time roles), access reviews, and risk-based (Identity Protection) Conditional Access.
 
@@ -115,6 +115,7 @@ Validated in a test tenant that held the base Intune SKU only (no Entra ID P1/P2
 Kept on purpose so the same mistakes are not repeated. Each one was disproven by a captured Graph response.
 
 - **"Autopilot is blocked only by missing P1."** Disproven: the identical opaque 400 persisted after P1 was active and assigned. Treat a plausible prerequisite as a hypothesis with a falsifying test, not a root cause.
+- **"Autopilot fails because the MDM user scope is *None*."** Disproven: after scoping automatic enrollment to the managed-users group, one retry failed with the same opaque 400 and the Autopilot settings endpoint still returned not-found. Change one variable, retry once, and record the result before trying the next idea.
 - **"A different Autopilot request schema will work."** Singular and legacy plural out-of-box-experience shapes, and a minimal body, all failed identically. If the error does not change with the body, look at tenant or service state.
 - **"The Autopilot profile API exists on Graph v1.0."** It is beta-only ("Resource not found for the segment").
 - **"Calling set-MDM-authority is a safe probe."** It is a write action, and it returns 400 when the authority is already Intune. Check with a read instead.
@@ -142,3 +143,4 @@ Kept on purpose so the same mistakes are not repeated. Each one was disproven by
 | 2026-10-06 | IT Administrator | Note deliberate trial stacking of Intune Plan 1 + Entra P1/P2 for max learning; 4 Entra seats for admin/pilot. |
 | 2026-10-07 | IT Administrator | Correct Autopilot finding: failure was initially attributed to missing P1 but persisted with P1 active; root cause under investigation (MDM user scope, Autopilot service initialization, or request schema). |
 | 2026-10-07 | IT Administrator | Add "Failed ideas (lab)" subsection listing disproven hypotheses and their lessons. |
+| 2026-10-07 | IT Administrator | Record lab test of the MDM user scope hypothesis: scoping automatic enrollment to the managed-users group did not fix the Autopilot profile error; add it to Failed ideas; remaining hypotheses are service initialization via the portal or a backend issue. |
