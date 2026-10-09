@@ -110,10 +110,13 @@ Validated in a test tenant that held the base Intune SKU only (no Entra ID P1/P2
 
 **Trial stacking (lab):** The evaluation deliberately stacked an Intune Plan 1 trial with an Entra ID P1/P2 trial to maximize learning inside the overlapping trial window and to mirror a production SKU mix. Four Entra seats were assigned for admin and pilot coverage (break-glass accounts left unlicensed). License state was verified read-only via Graph `subscribedSkus` / `licenseDetails` before any role-assignable-group or Conditional Access writes; gated rollout still follows this SOP's order (role-assignable groups first).
 
+**Pilot seat usage (lab, 2026-10-09):** 20 cloud-only pilot users plus the administrator now use 21 of 25 trial seats for both Entra ID P1 and Intune Plan 1, leaving 4 spare. The pilots sit in the all-managed-users group, so require-MFA Conditional Access, the MDM user scope and later Autopilot assignment apply to them. That group already had group-based licensing, so per-user direct assignment was redundant and raced with it (HTTP 409 concurrency errors). A user with both a group and a direct assignment still uses one seat.
+
 ### Failed ideas (lab)
 
 Kept on purpose so the same mistakes are not repeated. Each one was disproven by a captured Graph response.
 
+- **"Pilot users need direct license assignment after being added to the managed-users group."** Disproven: the group already had group-based licensing, and the direct calls hit HTTP 409 concurrency errors while the group-based licensing service was writing the same licenses. Check the target group's assigned licenses before licensing users directly.
 - **"Autopilot is blocked only by missing P1."** Disproven: the identical opaque 400 persisted after P1 was active and assigned. Treat a plausible prerequisite as a hypothesis with a falsifying test, not a root cause.
 - **"Autopilot fails because the MDM user scope is *None*."** Disproven: after scoping automatic enrollment to the managed-users group, one retry failed with the same opaque 400 and the Autopilot settings endpoint still returned not-found. Change one variable, retry once, and record the result before trying the next idea.
 - **"A different Autopilot request schema will work."** Singular and legacy plural out-of-box-experience shapes, and a minimal body, all failed identically. If the error does not change with the body, look at tenant or service state.
@@ -144,3 +147,4 @@ Kept on purpose so the same mistakes are not repeated. Each one was disproven by
 | 2026-10-07 | IT Administrator | Correct Autopilot finding: failure was initially attributed to missing P1 but persisted with P1 active; root cause under investigation (MDM user scope, Autopilot service initialization, or request schema). |
 | 2026-10-07 | IT Administrator | Add "Failed ideas (lab)" subsection listing disproven hypotheses and their lessons. |
 | 2026-10-07 | IT Administrator | Record lab test of the MDM user scope hypothesis: scoping automatic enrollment to the managed-users group did not fix the Autopilot profile error; add it to Failed ideas; remaining hypotheses are service initialization via the portal or a backend issue. |
+| 2026-10-09 | IT Administrator | Record pilot seat usage (20 pilots + admin = 21/25 seats per SKU) and the group-based vs direct licensing race; add it to Failed ideas. |
