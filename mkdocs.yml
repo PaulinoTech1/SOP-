@@ -10,6 +10,11 @@ theme:
 markdown_extensions:
   - admonition
   - tables
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 nav:
   - Home: index.md
   - Start here: onboarding/start-here.md
@@ -38,4 +43,8 @@ nav:
       - Retirement log: ownership/retirement-log.md
   - Templates:
       - SOP template: templates/sop-template.md
+  - Portfolio:
+      - "Intune/Entra lab: case study": portfolio/intune-entra-lab/README.md
+      - "Intune/Entra lab: architecture": portfolio/intune-entra-lab/architecture.md
+      - "Intune/Entra lab: resume bullets": portfolio/intune-entra-lab/resume-bullets.md
   - Build log: BUILD.md

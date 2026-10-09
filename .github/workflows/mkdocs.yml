@@ -17,7 +17,7 @@ jobs:
           mkdir -p docs
           cp README.md docs/index.md
           cp BUILD.md docs/
-          for d in onboarding workflows incident-response compliance ownership templates; do
+          for d in onboarding workflows incident-response compliance ownership templates portfolio; do
             [ -d "$d" ] && cp -r "$d" docs/
           done
       - run: pip install mkdocs-material

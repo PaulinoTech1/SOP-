@@ -15,12 +15,15 @@ Built to make onboarding faster and operations repeatable. Every procedure follo
 | `incident-response/` | Severity definitions, escalation matrix, response playbooks. |
 | `ownership/` | RACI charts, risk register, toil register, retirement log. |
 | `scripts/` | The SOP linter (CI for procedures). |
+| `portfolio/` | Sanitized lab write-ups. `portfolio/intune-entra-lab/` is the Intune / Entra ID security baseline case study behind SOP-075. |
 
 ## Reading this repo
 
 New here? Start with `onboarding/start-here.md` — a 45-minute reading path in order.
 
 Want the reasoning behind the design? Read `BUILD.md` — every major decision is recorded as an architecture decision.
+
+Want to see the procedures applied? Read the [Intune / Entra ID lab case study](portfolio/intune-entra-lab/README.md) — a sanitized build of a test tenant from zero to a Conditional Access, BitLocker and least-privilege baseline, including the hypotheses that turned out wrong.
 
 Prefer a website to raw Markdown? `mkdocs.yml` builds a searchable docs site (`mkdocs build`, deploy to GitHub Pages).
 
