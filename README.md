@@ -1,5 +1,9 @@
 # SOP
 
+## TL;DR
+
+Versioned standard operating procedures for small-business IT: onboarding, incident response, compliance mappings (PCI DSS, GLBA), and repeatable workflows, all linted by CI. Goal: operations that do not depend on one person's memory.
+
 Standard Operating Procedures for IT operations: onboarding, compliance, workflows, incident response, and ownership.
 
 Built to make onboarding faster and operations repeatable. Every procedure follows the same template, has a named owner, and carries a review date. If it doesn't have an owner and a review date, it's a draft, not a procedure.
